@@ -1,38 +1,20 @@
 const express = require('express');
 const path = require('path');
+const members = require('./Members');
+const moment = require('moment');
+const logger = require('./middleware/logger');
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+
+
+//Init middleware
+app.use(logger);
 
 // app.get('/', (request, response) => {
 //     // response.send('<h1>Hello World!</h1>');
 //     response.sendFile(path.join(__dirname, 'public','index.html'));
 // })
-
-//HARD CODE MEMBERS
-
-const members = [
-    {
-        id: 1,
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        status: 'active'
-    },
-    {
-        id: 2,
-        name: 'Bob Williams',
-        email: 'bob@gmail.com',
-        status: 'inactive'
-    },
-    {
-        id: 3,
-        name: 'Shannon Jackson',
-        email: 'shannon@gmail.com',
-        status: 'active'
-    },
-]
-
 
 //Gets All Members
 app.get('/api/members', (req, res) => {
@@ -43,4 +25,5 @@ app.get('/api/members', (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on PORT: ${PORT}`));
