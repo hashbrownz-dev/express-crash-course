@@ -8,19 +8,17 @@ const app = express();
 
 
 //Init middleware
-app.use(logger);
+//app.use(logger);
 
-// app.get('/', (request, response) => {
-//     // response.send('<h1>Hello World!</h1>');
-//     response.sendFile(path.join(__dirname, 'public','index.html'));
-// })
-
-
+//BODY PARSER MIDDLEWARE
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 
 //SET STATIC FOLDER
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+//API MEMBERS ROUTES
 app.use('/api/members', require('./routes/api/members'));
 
 const PORT = process.env.PORT || 5000;
